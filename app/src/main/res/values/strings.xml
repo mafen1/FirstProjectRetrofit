@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MyAnime</string>
+    <string name="ascending_sort">а - я</string>
+    <string name="descending_sort">я - а</string>
+    <string name="todo">TODO</string>
+    <string name="btn_delete">btn_delete</string>
+    <string name="card_image">card_image</string>
+    <string name="sort">а-я</string>
+    <string name="sortAsc">я-а</string>
+</resources>

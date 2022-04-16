@@ -4,10 +4,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
-    private val baseUrl = "https://anime-facts-rest-api.herokuapp.com"
+    private const val baseUrl = "https://anime-facts-rest-api.herokuapp.com"
     private var retrofit: Retrofit? = null
 
-    private fun getClient(baseUrl: String): Retrofit{
+    private fun getClient(baseUrl: String ): Retrofit{
         if (retrofit == null){
         retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
@@ -17,6 +17,6 @@ object ApiClient {
         return retrofit!!
     }
 
-    fun getResponse() = getClient(baseUrl).create(RequestGet::class.java)
+    fun getResponse(): RequestGet = getClient(baseUrl).create(RequestGet::class.java)
 
 }

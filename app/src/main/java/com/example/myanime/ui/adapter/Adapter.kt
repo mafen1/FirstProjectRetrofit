@@ -10,11 +10,8 @@ import com.example.myanime.data.models.DataItem
 import com.example.myanime.databinding.AnimeItemBinding
 
 class Adapter :  ListAdapter<DataItem, Adapter.ViewHolder>(ItemComparator()) {
-    companion object {
-        val TAG = "TAG"
-    }
+
     var currentPosition: ((position: Int) -> Unit)? = null
-//    var callBackPersonSecond: ((age: Int) -> Unit)? = null
 
     inner class ViewHolder(
         private val binding: AnimeItemBinding

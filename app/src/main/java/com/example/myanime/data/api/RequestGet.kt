@@ -13,6 +13,5 @@ interface RequestGet {
         override suspend fun getRequest(json: Boolean): Response<ResponseAnime> {
             return ApiClient.getResponse().getRequest(json)
         }
-
     }
 }

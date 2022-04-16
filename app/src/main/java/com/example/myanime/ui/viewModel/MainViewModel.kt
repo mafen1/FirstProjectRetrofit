@@ -1,6 +1,5 @@
 package com.example.myanime.ui.viewModel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -21,13 +20,11 @@ class MainViewModel(
     private var _apiState = MutableLiveData<ApiState>(ApiState.ApiEmpty)
     var apiState: LiveData<ApiState> = _apiState
 
-    private val TAG = "TAG"
-
     init {
-        animeInfo(true)
+        fillAnimeInfo(true)
     }
 
-    fun animeInfo(json: Boolean) {
+    fun fillAnimeInfo(json: Boolean) {
 
         _apiState.value = ApiState.ApiLoading
 
@@ -40,12 +37,12 @@ class MainViewModel(
                 }
                 _apiState.postValue( ApiState.Success )
             } else {
-                _apiState.value = ApiState.Error("error")
+                _apiState.value = ApiState.Error
             }
         }
     }
 
-    fun delete(position: Int) {
+    fun deleteUser(position: Int) {
         val data = _dataAnime.value
         data?.removeAt(position)
         _dataAnime.value = data!!

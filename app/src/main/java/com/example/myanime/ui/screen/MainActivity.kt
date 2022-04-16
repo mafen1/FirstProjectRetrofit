@@ -24,14 +24,12 @@ class MainActivity : AppCompatActivity() {
         ViewModelFactory(UseCase(repositoryImpl))
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initData()
         initView()
-
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -68,24 +66,24 @@ class MainActivity : AppCompatActivity() {
         }
         binding.btnAscendingSort.setOnClickListener {
             viewModel.sortASC()
-            adapter.notifyDataSetChanged()
+            updateAdapter()
         }
         binding.btnDescendingSort.setOnClickListener {
             viewModel.sortDes()
-            adapter.notifyDataSetChanged()
+            updateAdapter()
         }
         binding.rvAnime.adapter = adapter
         binding.rvAnime.layoutManager = LinearLayoutManager(this)
     }
 
-    @SuppressLint("NotifyDataSetChanged")
+
     private fun initData() {
         swipeRefresh()
 
         adapter.currentPosition = {
             if (it >= 1) {
-                viewModel.delete(it - 1)
-                adapter.notifyDataSetChanged()
+                viewModel.deleteUser(it - 1)
+                updateAdapter()
             } else {
                 Snackbar.make(
                     binding.root,
@@ -95,12 +93,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
+    @SuppressLint("NotifyDataSetChanged")
+    private fun updateAdapter(){
+        adapter.notifyDataSetChanged()
+    }
     private fun showSnackBar(message: String) {
-        Snackbar.make(this,
+        Snackbar.make(
+            this,
             findViewById(android.R.id.content),
             message,
-            Snackbar.LENGTH_LONG)
+            Snackbar.LENGTH_LONG
+        )
             .show()
     }
 
@@ -123,7 +126,7 @@ class MainActivity : AppCompatActivity() {
     private fun swipeRefresh() {
         binding.swipeRefreshContainer.setOnRefreshListener {
             viewModel.apply {
-                viewModel.animeInfo(true)
+                fillAnimeInfo(true)
                 binding.swipeRefreshContainer.isRefreshing = false
             }
         }
